@@ -51,7 +51,7 @@ await FlutterD2go.loadModel(
     labelPath: 'assets/models/classes.txt', // required
 );
 ```
-
+ 
 ### 2. Get static image predictions
 
 ```dart
