@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
+import 'dart:developer';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -106,6 +107,7 @@ class _MyAppState extends State<MyApp> {
                       e['confidenceInClass'],
                       e['detectedClass']);
                 },
+                // log('data', $e);
               ).toList();
             }
             setState(
@@ -243,6 +245,11 @@ class _MyAppState extends State<MyApp> {
 
       if (_recognitions!.first.keypoints != null) {
         for (RecognitionModel recognition in _recognitions!) {
+          print("recognition rect ${recognition.rect}");
+          print("recognition mask ${recognition.mask}");
+          print("recognition keypoints ${recognition.keypoints}");
+          print("recognition confidenceInClass ${recognition.confidenceInClass}");
+          print("recognition detectedClass ${recognition.detectedClass}");
           List<Widget> keypointChildren = [];
           for (Keypoint keypoint in recognition.keypoints!) {
             keypointChildren.add(
@@ -252,8 +259,13 @@ class _MyAppState extends State<MyApp> {
                 imageHeightScale: heightScale,
               ),
             );
+            // log('keypoint, $keypoint');
+            // print('$keypoint, $keypoint.x, $keypoint.y');
+            print("keypoint.x ${keypoint.x} keypoint.y ${keypoint.y}");
           }
           stackChildren.addAll(keypointChildren);
+          var len = keypointChildren.length;
+          print("Length of keypointChildren : ${len}");
         }
       }
 
@@ -270,7 +282,7 @@ class _MyAppState extends State<MyApp> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter D2Go'),
+        title: const Text('Flutter_D2Go'),
         backgroundColor: Colors.deepPurpleAccent,
       ),
       body: Column(
